@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="40" tilewidth="10" tileheight="10" nextobjectid="19">
+ <objectgroup name="对象层 1">
+  <object id="3" x="17.5" y="400">
+   <polyline points="0,0 10,0 10,-7.5 20,-10"/>
+  </object>
+  <object id="6" x="20" y="180">
+   <polyline points="0,0 0,40 32.5,40 30,0 0,0"/>
+  </object>
+  <object id="12" x="30" y="0">
+   <polyline points="0,0 0,10 20,10 20,0 -2.5,0"/>
+  </object>
+  <object id="13" x="20" y="20">
+   <polyline points="0,0 50,0 50,-10 0,-10 0,-2.5"/>
+  </object>
+  <object id="18" x="70" y="180">
+   <polyline points="0,0 -50,-150 20,-150 0,0"/>
+  </object>
+ </objectgroup>
+</map>

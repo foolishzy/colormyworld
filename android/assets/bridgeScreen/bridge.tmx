@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="25" tilewidth="16" tileheight="16" nextobjectid="107">
+ <tileset firstgid="1" name="1" tilewidth="800" tileheight="400" tilecount="1">
+  <tile id="0">
+   <image width="800" height="400" source="backGroundresized.png"/>
+  </tile>
+ </tileset>
+ <objectgroup name="ground">
+  <object id="19" x="96" y="332" width="400" height="12"/>
+  <object id="20" x="596" y="332" width="204" height="8"/>
+  <object id="92" x="96" y="284" width="4" height="48"/>
+  <object id="97" x="100" y="284">
+   <polyline points="0,0 160,0 164,-8 88,-24 0,0"/>
+  </object>
+  <object id="98" x="188" y="260">
+   <polyline points="0,0 -24,-20 -60,0 0,0"/>
+  </object>
+  <object id="99" x="164" y="240">
+   <polyline points="0,0 20,-56 -48,-48 0,0"/>
+  </object>
+  <object id="100" x="188" y="184">
+   <polyline points="0,0 12,-52 -48,-36 0,0"/>
+  </object>
+  <object id="101" x="264" y="272" width="12" height="8"/>
+ </objectgroup>
+ <objectgroup name="spark">
+  <object id="2" x="264" y="280" width="8" height="20"/>
+  <object id="3" x="696" y="268" width="16" height="20"/>
+  <object id="4" x="748" y="296" width="16" height="16"/>
+  <object id="5" x="732" y="252" width="16" height="16"/>
+  <object id="6" x="712" y="300" width="8" height="12"/>
+  <object id="7" x="480" y="320" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="signal">
+  <object id="9" x="336" y="320" width="16" height="16"/>
+  <object id="10" x="416" y="320" width="16" height="16"/>
+  <object id="12" x="656" y="320" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="born&amp;destination">
+  <object id="13" name="born" x="112" y="304" width="32" height="32"/>
+  <object id="15" name="destination" x="784" y="304" width="16" height="32"/>
+ </objectgroup>
+ <objectgroup name="bridgeSprite">
+  <object id="24" name="point" x="496" y="320" width="16" height="16"/>
+  <object id="102" name="bridge" x="496" y="240" width="8" height="96"/>
+ </objectgroup>
+ <objectgroup name="nail">
+  <object id="104" x="504" y="256" width="16" height="4"/>
+  <object id="106" x="576" y="336" width="16" height="4">
+   <properties>
+    <property name="staticNail" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
