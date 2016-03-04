@@ -25,12 +25,12 @@ public class nail {
     private boolean isLive = true;
     private World world;
     private Body body;
-    public nail(World world, MapObject object, boolean isSensor) {
+    public nail(World world, MapObject object, boolean isSensor, short maskBit) {
         this.world = world;
-        defineB2d( object,  isSensor);
+        defineB2d( object,  isSensor, maskBit);
     }
 
-    private void defineB2d(MapObject object, boolean isSensor){
+    private void defineB2d(MapObject object, boolean isSensor, short maskBit){
         if(RectangleMapObject.class.isAssignableFrom(object.getClass())){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             //BodyDef
@@ -45,6 +45,8 @@ public class nail {
                     rect.getHeight() / 2 / ColorMyWorldGame.PPM);
             fixdef.shape =  shape;
             fixdef.isSensor = isSensor;
+            fixdef.filter.categoryBits = ColorMyWorldGame.NAIL_BIT;
+            fixdef.filter.maskBits = maskBit;
             //create
             body = world.createBody(bdf);
             body.createFixture(fixdef);
@@ -57,7 +59,7 @@ public class nail {
     }
 
     public void update(){
-        if (!isLive && setToDestroy){
+        if (isLive && setToDestroy){
             isLive = false;
             world.destroyBody(body);
         }
@@ -65,7 +67,10 @@ public class nail {
 
     public void destroyBody(){
         if (!setToDestroy && isLive)
+        {
             setToDestroy = true;
+            Gdx.app.log("destory the nail ","revolution joint start rotate");
+        }
         else
             Gdx.app.log("mistake: ","staticItem destroyBoy signal !!! ");
     }

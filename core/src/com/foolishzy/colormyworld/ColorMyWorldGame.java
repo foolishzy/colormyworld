@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.foolishzy.colormyworld.playScreen.bridgeScreen;
 import com.foolishzy.colormyworld.preScreen.preScreen;
+import com.foolishzy.colormyworld.testScreen.distanceJointTestScreen;
 import com.foolishzy.colormyworld.testScreen.polyLineTest;
 import com.foolishzy.colormyworld.testScreen.testScreen;
 
@@ -44,9 +45,9 @@ public class ColorMyWorldGame extends Game{
 		//set screen
 		setScreen(new bridgeScreen(this));
 
-		//set testscreen to test polyline mapObje ct
-//		setScreen(new polyLineTest(this, "testSource/polylinetest.tmx"));
+
 	}
+
 
 	public ColorMyWorldGame() {
 		super();

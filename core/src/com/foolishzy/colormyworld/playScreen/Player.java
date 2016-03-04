@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.foolishzy.colormyworld.ColorMyWorldGame;
 import com.foolishzy.colormyworld.spark.MyScreen;
 
 /**
@@ -44,8 +45,8 @@ public class Player extends Sprite {
         bdf.type = BodyDef.BodyType.DynamicBody;
         //fixtureDef
         FixtureDef fixdef = new FixtureDef();
-//        fixdef.filter.categoryBits = ColorMyWorldGame.PLAYER_BIT;
-//        fixdef.filter.maskBits = ColorMyWorldGame.GROUND_BIT;
+        fixdef.filter.categoryBits = ColorMyWorldGame.PLAYER_BIT;
+        fixdef.filter.maskBits = ColorMyWorldGame.GROUND_BIT ;
         //shape
         CircleShape shape = new CircleShape();
         shape.setRadius(6f / PPM);

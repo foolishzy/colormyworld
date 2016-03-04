@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="25" tilewidth="16" tileheight="16" nextobjectid="107">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="25" tilewidth="16" tileheight="16" nextobjectid="115">
  <tileset firstgid="1" name="1" tilewidth="800" tileheight="400" tilecount="1">
   <tile id="0">
    <image width="800" height="400" source="backGroundresized.png"/>
   </tile>
  </tileset>
  <objectgroup name="ground">
-  <object id="19" x="96" y="332" width="400" height="12"/>
+  <object id="19" x="96" y="332" width="500" height="12"/>
   <object id="20" x="596" y="332" width="204" height="8"/>
   <object id="92" x="96" y="284" width="4" height="48"/>
   <object id="97" x="100" y="284">
@@ -22,6 +22,11 @@
    <polyline points="0,0 12,-52 -48,-36 0,0"/>
   </object>
   <object id="101" x="264" y="272" width="12" height="8"/>
+  <object id="110" x="516" y="340" width="2" height="6">
+   <properties>
+    <property name="staticNail" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="spark">
   <object id="2" x="264" y="280" width="8" height="20"/>
@@ -45,11 +50,23 @@
   <object id="102" name="bridge" x="496" y="240" width="8" height="96"/>
  </objectgroup>
  <objectgroup name="nail">
-  <object id="104" x="504" y="256" width="16" height="4"/>
-  <object id="106" x="576" y="336" width="16" height="4">
+  <object id="104" x="504" y="256" width="16" height="4">
+   <properties>
+    <property name="temp" value=""/>
+   </properties>
+  </object>
+  <object id="106" x="588" y="340" width="2" height="6">
    <properties>
     <property name="staticNail" value=""/>
    </properties>
   </object>
+  <object id="107" x="480" y="256" width="12" height="4">
+   <properties>
+    <property name="staticNail" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="fence">
+  <object id="113" name="fence" x="480" y="108" width="16" height="224"/>
  </objectgroup>
 </map>

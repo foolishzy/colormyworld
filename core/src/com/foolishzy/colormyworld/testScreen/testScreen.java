@@ -39,6 +39,7 @@ public class testScreen extends MyScreen{
         public myBox(testScreen screen){
             this.screen = screen;
             this.batch = screen.batch;
+            this.world = screen.world;
             defineyBox();
 
         }

@@ -69,6 +69,8 @@ public class bridgeScreen extends MyScreen {
         batch.begin();
         //background
         batch.draw(backGround, 0, 0, gamePort.getWorldWidth(), gamePort.getWorldHeight());
+        //bridge draw
+        bridge.draw(batch);
         batch.end();
         //spark
         for (Spark spark : sparkList) {
@@ -98,11 +100,10 @@ public class bridgeScreen extends MyScreen {
 
     private void handleinput(float dt){
         //bridge
-        if(Gdx.input.isKeyPressed(Input.Keys.Q)){
+        if(!bridge.isRotate() && Gdx.input.isKeyPressed(Input.Keys.Q)){
             bridge.rotateBridge();
             Gdx.app.log("Q pressed", "rotate bridge");
         }
-
     }
 
     @Override

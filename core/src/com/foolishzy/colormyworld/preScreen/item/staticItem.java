@@ -1,6 +1,5 @@
 package com.foolishzy.colormyworld.preScreen.item;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
@@ -50,6 +49,9 @@ public class staticItem {
             PolygonShape shape = new PolygonShape();
             shape.set(vertices);
             fixdf.shape = shape;
+            //filter
+            fixdf.filter.categoryBits = ColorMyWorldGame.GROUND_BIT;
+            fixdf.filter.maskBits = ColorMyWorldGame.PLAYER_BIT;
 //            create
             body = world.createBody(bdf);
             body.createFixture(fixdf);
@@ -69,6 +71,9 @@ public class staticItem {
                     rect.getHeight() / 2 / ColorMyWorldGame.PPM);
             fixdef.shape =  shape;
             fixdef.isSensor = isSensor;
+            //filter
+            fixdef.filter.categoryBits = ColorMyWorldGame.GROUND_BIT;
+            fixdef.filter.maskBits = ColorMyWorldGame.PLAYER_BIT;
             //create
             body = world.createBody(bdf);
             body.createFixture(fixdef);
@@ -92,6 +97,9 @@ public class staticItem {
             shape.set(vertices);
             fixdef.shape = shape;
             fixdef.isSensor = isSensor;
+            //filter
+            fixdef.filter.categoryBits = ColorMyWorldGame.GROUND_BIT;
+            fixdef.filter.maskBits = ColorMyWorldGame.PLAYER_BIT;
             //create
             body = world.createBody(bdf);
             body.createFixture(fixdef);
@@ -103,7 +111,7 @@ public class staticItem {
     }
 
     public void update(){
-        if (!isLive && setToDestroy){
+        if (isLive && setToDestroy){
             isLive = false;
             world.destroyBody(body);
         }
