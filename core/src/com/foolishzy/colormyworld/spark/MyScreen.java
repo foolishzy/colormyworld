@@ -1,11 +1,13 @@
 package com.foolishzy.colormyworld.spark;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.foolishzy.colormyworld.ColorMyWorldGame;
 
@@ -25,6 +27,7 @@ public abstract class MyScreen implements com.badlogic.gdx.Screen{
     protected TiledMap map;
     protected Box2DDebugRenderer b2drender;
     protected float PPM;
+    protected com.badlogic.gdx.scenes.scene2d.Stage myStage;
     public MyScreen(ColorMyWorldGame game){
         this.PPM = ColorMyWorldGame.PPM;
         this.game = game;
@@ -35,6 +38,9 @@ public abstract class MyScreen implements com.badlogic.gdx.Screen{
         gamePort = new FitViewport(ColorMyWorldGame.V_WIDTH / ColorMyWorldGame.PPM,
                 ColorMyWorldGame.V_HEIGHT / ColorMyWorldGame.PPM, gameCam);
         gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
+
+        myStage = new com.badlogic.gdx.scenes.scene2d.Stage(gamePort);
+        Gdx.input.setInputProcessor(myStage);
 
         world = new World(new Vector2(0f, -10f), true);
         b2drender = new Box2DDebugRenderer();
@@ -86,4 +92,6 @@ public abstract class MyScreen implements com.badlogic.gdx.Screen{
     public World  getWorld(){
         return world;
     }
+
+    public Stage getMyStage(){return myStage;}
 }
