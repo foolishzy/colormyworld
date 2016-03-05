@@ -30,13 +30,12 @@ public class Spark extends Actor   implements Disposable {
     private Array<Image> imgList;
     private static final int TOTAL_NUM = 10;
     private Image checkLayer;
-    private FitViewport viewport;
     private OrthographicCamera cam;
     private Stage stage;
     private boolean isTouched;
     private Batch batch;
 
-    public Spark(float x, float y, float width, float height){
+    public Spark(float x, float y, float width, float height, MyScreen screen){
         isTouched = false;
 
         /*
@@ -47,10 +46,8 @@ public class Spark extends Actor   implements Disposable {
                          */
         batch = new SpriteBatch();
 
-        cam = new OrthographicCamera();
-        viewport = new FitViewport(ColorMyWorldGame.V_WIDTH,
-                ColorMyWorldGame.V_HEIGHT, cam);
-        stage = new Stage(viewport);
+        cam = screen.getStageCam();
+        stage = screen.getMyStage();
 
         //checkLayer transparent
         checkLayer = new Image(new Texture(new Pixmap((int) width,
@@ -59,17 +56,22 @@ public class Spark extends Actor   implements Disposable {
         checkLayer.setPosition(x, y);
 
         //check if touched or not
-        Gdx.input.setInputProcessor(stage);
         checkLayer.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 isTouched = true;
+                ColorMyWorldGame.PLAYER_TEMP_LOCK = true;
+                Gdx.app.log("checkLayer checked"," ");
+                Gdx.app.log("spark touched "," player lock");
                 return false;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                ColorMyWorldGame.PLAYER_TEMP_LOCK = true;
+                ColorMyWorldGame.PLAYER_TEMP_LOCK = false;
+                Gdx.app.log("spark touch up ", "player unlock");
+                isTouched = false;
+                Gdx.app.log("spark touch up ","reset isTouched = false");
                 return;
             }
         });
@@ -137,7 +139,10 @@ public class Spark extends Actor   implements Disposable {
         }
         imgList.clear();
         checkLayer.clear();
-        stage.clear();
+    }
+
+    public boolean isSwitched(){
+        return isTouched;
     }
     }
 

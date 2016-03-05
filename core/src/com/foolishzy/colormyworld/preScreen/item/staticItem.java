@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.foolishzy.colormyworld.ColorMyWorldGame;
+import com.sun.media.jfxmediaimpl.MediaDisposer;
 
 /**
  * Created by foolishzy on 2016/2/1.
@@ -25,13 +26,15 @@ import com.foolishzy.colormyworld.ColorMyWorldGame;
  *      there are some problem with it's position, i don't know how to
  *      set it's position,so in this game pls use rectangleShape
  */
-public class staticItem {
+public class staticItem implements MediaDisposer.Disposable{
     private boolean setToDestroy = false;
     private boolean isLive = true;
     private World world;
     private Body body;
+    private String name;
     public staticItem(World world, MapObject object, boolean isSensor){
         this.world = world;
+        name = object.getName();
         //polyline object
         if (PolylineMapObject.class.isAssignableFrom(object.getClass())) {
             Polyline plyline = ((PolylineMapObject) object).getPolyline();
@@ -54,7 +57,7 @@ public class staticItem {
             fixdf.filter.maskBits = ColorMyWorldGame.PLAYER_BIT;
 //            create
             body = world.createBody(bdf);
-            body.createFixture(fixdf);
+            body.createFixture(fixdf).setUserData(this);
         }
 //        rectangle object
         else if(RectangleMapObject.class.isAssignableFrom(object.getClass())){
@@ -76,7 +79,7 @@ public class staticItem {
             fixdef.filter.maskBits = ColorMyWorldGame.PLAYER_BIT;
             //create
             body = world.createBody(bdf);
-            body.createFixture(fixdef);
+            body.createFixture(fixdef).setUserData(this);
         }
         //Polygon object
         else if(PolygonMapObject.class.isAssignableFrom(object.getClass())){
@@ -102,7 +105,7 @@ public class staticItem {
             fixdef.filter.maskBits = ColorMyWorldGame.PLAYER_BIT;
             //create
             body = world.createBody(bdf);
-            body.createFixture(fixdef);
+            body.createFixture(fixdef).setUserData(this);
         }
     }
 
@@ -123,5 +126,14 @@ public class staticItem {
             setToDestroy = true;
         else
             Gdx.app.log("mistake: ","staticItem destroyBoy signal !!! ");
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    @Override
+    public void dispose() {
+        world.destroyBody(body);
     }
 }

@@ -57,7 +57,6 @@ public class preScreen implements com.badlogic.gdx.Screen {
 
 
     private slideFrame slide1;
-    private Spark spark;
 
     public preScreen(ColorMyWorldGame game){
         this.batch = game.batch;
@@ -90,7 +89,6 @@ public class preScreen implements com.badlogic.gdx.Screen {
         //next background
         bgd = new backGround(this);
 
-        spark = new Spark(0,0,100,100);
         slide1 = new slideFrame(this);
     }
     @Override
@@ -123,7 +121,6 @@ public class preScreen implements com.badlogic.gdx.Screen {
         //b2drender
         b2drender.render(world, gameCam.combined);
 
-        spark.draw(delta);
 
 
 
@@ -188,7 +185,6 @@ public class preScreen implements com.badlogic.gdx.Screen {
         backGround.dispose();
         box.dispose();
         slide1.dispose();
-        spark.dispose();
         world.dispose();
     }
 

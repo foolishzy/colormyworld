@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.foolishzy.colormyworld.ColorMyWorldGame;
 import com.foolishzy.colormyworld.preScreen.item.staticItem;
+import com.sun.media.jfxmediaimpl.MediaDisposer;
 
 /**
  * Created by foolishzy on 2016/2/25.
@@ -20,7 +21,7 @@ import com.foolishzy.colormyworld.preScreen.item.staticItem;
  * <p/>
  * others:
  */
-public class nail {
+public class nail implements MediaDisposer.Disposable{
     private boolean setToDestroy = false;
     private boolean isLive = true;
     private World world;
@@ -71,7 +72,10 @@ public class nail {
             setToDestroy = true;
             Gdx.app.log("destory the nail ","revolution joint start rotate");
         }
-        else
-            Gdx.app.log("mistake: ","staticItem destroyBoy signal !!! ");
+    }
+
+    @Override
+    public void dispose() {
+        world.destroyBody(body);
     }
 }

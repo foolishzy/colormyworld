@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="25" tilewidth="16" tileheight="16" nextobjectid="115">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="25" tilewidth="16" tileheight="16" nextobjectid="116">
  <tileset firstgid="1" name="1" tilewidth="800" tileheight="400" tilecount="1">
   <tile id="0">
    <image width="800" height="400" source="backGroundresized.png"/>
@@ -34,12 +34,24 @@
   <object id="4" x="748" y="296" width="16" height="16"/>
   <object id="5" x="732" y="252" width="16" height="16"/>
   <object id="6" x="712" y="300" width="8" height="12"/>
-  <object id="7" x="480" y="320" width="16" height="16"/>
+  <object id="7" x="480" y="320" width="16" height="16">
+   <properties>
+    <property name="switch" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="signal">
   <object id="9" x="336" y="320" width="16" height="16"/>
-  <object id="10" x="416" y="320" width="16" height="16"/>
-  <object id="12" x="656" y="320" width="16" height="16"/>
+  <object id="10" x="416" y="320" width="16" height="16">
+   <properties>
+    <property name="2" value=""/>
+   </properties>
+  </object>
+  <object id="12" x="656" y="320" width="16" height="16">
+   <properties>
+    <property name="3" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="born&amp;destination">
   <object id="13" name="born" x="112" y="304" width="32" height="32"/>

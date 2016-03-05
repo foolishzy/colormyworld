@@ -1,5 +1,6 @@
 package com.foolishzy.colormyworld.spark.Signal;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
@@ -70,8 +71,9 @@ public class Signal extends Actor implements MediaDisposer.Disposable{
 
         borad.setPosition(position.x, position.y);
         hint.setPosition(
-                position.x - hintRegion.getRegionWidth() / 2,
-                position.y - hintRegion.getRegionHeight() / 2
+                position.x + ((RectangleMapObject) positionObject).getRectangle().getWidth() / 2
+                        - hint.getWidth() / 2,
+                position.y + ((RectangleMapObject) positionObject).getRectangle().getHeight() / 2
         );
 
         hint.setVisible(hintIsVisable);
@@ -82,12 +84,16 @@ public class Signal extends Actor implements MediaDisposer.Disposable{
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 hintIsVisable = true;
+                ColorMyWorldGame.PLAYER_TEMP_LOCK = true;
+                Gdx.app.log("broad touched ", "player lock");
+                Gdx.app.log("broad touched", " show hint ");
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                ColorMyWorldGame.PLAYER_TEMP_LOCK = true;
+                ColorMyWorldGame.PLAYER_TEMP_LOCK = false;
+                Gdx.app.log("broad touch up ", " player unlock");
             }
         });
 
@@ -101,23 +107,26 @@ public class Signal extends Actor implements MediaDisposer.Disposable{
         update(delta);
         stage.act();
         stage.draw();
-
     }
 
     private void update(float delta){
-        if (countTime >= HINT_TIME && hintIsVisable){
+        if (countTime <= HINT_TIME && hintIsVisable){
             hint.setVisible(true);
             countTime += delta;
         }
         else{
             countTime = 0;
-            hint.setVisible(false);
+            hintIsVisable = false;
+            hint.setVisible(hintIsVisable);
         }
     }
 
     @Override
     public void dispose() {
 
+        hint.clear();
+        borad.clear();
+        stage.clear();
     }
 
 }

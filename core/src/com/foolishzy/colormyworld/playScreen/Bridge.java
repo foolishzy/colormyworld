@@ -42,10 +42,7 @@ public class Bridge extends Sprite  implements MediaDisposer.Disposable {
     private final short BRIDGE_BIT = ColorMyWorldGame.GROUND_BIT;
     private boolean isRotate;
     private staticItem fence;
-
-    private Vector2 regionPosition;
     private Vector2 bridgeSize;
-
     private nail rightNail;
 
     public Bridge(bridgeScreen screen) {
@@ -83,7 +80,6 @@ public class Bridge extends Sprite  implements MediaDisposer.Disposable {
 
         //rotate bridge region
         if (isRotate){
-            System.out.println(bridgeBody.getAngle() * 180 / MathUtils.PI);
             setRotation(bridgeBody.getAngle()*  180 / MathUtils.PI);
             if (bridgeBody.getAngle()* 180 / MathUtils.PI <= -89){
                 isRotate = false;
@@ -197,6 +193,12 @@ public class Bridge extends Sprite  implements MediaDisposer.Disposable {
 
     @Override
     public void dispose() {
+        world.destroyJoint(joint);
+        world.destroyBody(bridgeBody);
+        world.destroyBody(rotatePointBody);
+        fence.dispose();
+        rightNail.dispose();
+
 
     }
 }

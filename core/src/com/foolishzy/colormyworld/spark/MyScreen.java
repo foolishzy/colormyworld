@@ -28,10 +28,19 @@ public abstract class MyScreen implements com.badlogic.gdx.Screen{
     protected Box2DDebugRenderer b2drender;
     protected float PPM;
     protected com.badlogic.gdx.scenes.scene2d.Stage myStage;
+
+    //stage
+    protected FitViewport stagePort;
+    protected OrthographicCamera stageCam;
+
     public MyScreen(ColorMyWorldGame game){
+
+        //basic
         this.PPM = ColorMyWorldGame.PPM;
         this.game = game;
         this.batch = game.batch;
+
+        //screen
         gameCam = new OrthographicCamera();
         gameCam.setToOrtho(false, ColorMyWorldGame.V_WIDTH / ColorMyWorldGame.PPM,
                 ColorMyWorldGame.V_HEIGHT / ColorMyWorldGame.PPM);
@@ -39,9 +48,16 @@ public abstract class MyScreen implements com.badlogic.gdx.Screen{
                 ColorMyWorldGame.V_HEIGHT / ColorMyWorldGame.PPM, gameCam);
         gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
-        myStage = new com.badlogic.gdx.scenes.scene2d.Stage(gamePort);
+        //stage
+        stageCam = new OrthographicCamera();
+        stageCam.setToOrtho(false, ColorMyWorldGame.V_WIDTH, ColorMyWorldGame.V_HEIGHT);
+        stagePort = new FitViewport(ColorMyWorldGame.V_WIDTH, ColorMyWorldGame.V_HEIGHT, stageCam);
+        stageCam.position.set(stagePort.getWorldWidth() / 2, stagePort.getWorldHeight() / 2, 0f);
+
+        myStage = new com.badlogic.gdx.scenes.scene2d.Stage(stagePort);
         Gdx.input.setInputProcessor(myStage);
 
+        //b2d
         world = new World(new Vector2(0f, -10f), true);
         b2drender = new Box2DDebugRenderer();
 
@@ -94,4 +110,12 @@ public abstract class MyScreen implements com.badlogic.gdx.Screen{
     }
 
     public Stage getMyStage(){return myStage;}
+
+    public OrthographicCamera getStageCam(){
+        return stageCam;
+    }
+
+    public void over(){
+
+    }
 }
