@@ -25,6 +25,8 @@ import com.sun.media.jfxmediaimpl.MediaDisposer;
  * ps: in this code , when the object is polygonShape or polyLineShape,
  *      there are some problem with it's position, i don't know how to
  *      set it's position,so in this game pls use rectangleShape
+ *
+ *      maybe i have fix the problem in this commit :-)
  */
 public class staticItem implements MediaDisposer.Disposable{
     private boolean setToDestroy = false;
@@ -86,8 +88,10 @@ public class staticItem implements MediaDisposer.Disposable{
             Polygon plygon= ((PolygonMapObject) object).getPolygon();
             Rectangle rect = plygon.getBoundingRectangle();
             BodyDef bdf = new BodyDef();
-            bdf.position.set((rect.getX() + rect.getWidth() / 2 ) / ColorMyWorldGame.PPM,
-                    (rect.getY() + rect.getHeight() / 2 ) / ColorMyWorldGame.PPM);
+//            bdf.position.set((rect.getX() + rect.getWidth() / 2 ) / ColorMyWorldGame.PPM,
+//                    (rect.getY() + rect.getHeight() / 2 ) / ColorMyWorldGame.PPM);
+            bdf.position.set((rect.getX() + rect.getWidth()) / ColorMyWorldGame.PPM,
+                    rect.getY() / ColorMyWorldGame.PPM);
             bdf.type = BodyDef.BodyType.StaticBody;
             //fixtureDef
             FixtureDef fixdef = new FixtureDef();
