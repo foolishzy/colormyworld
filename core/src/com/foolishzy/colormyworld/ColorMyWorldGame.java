@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.foolishzy.colormyworld.playScreen.bridgeScreen;
 import com.foolishzy.colormyworld.preScreen.preScreen;
+import com.foolishzy.colormyworld.testScreen.camTest;
 import com.foolishzy.colormyworld.testScreen.distanceJointTestScreen;
 import com.foolishzy.colormyworld.testScreen.polyLineTest;
 import com.foolishzy.colormyworld.testScreen.testScreen;
@@ -27,6 +28,7 @@ public class ColorMyWorldGame extends Game{
 	public static final short GROUND_BIT = 8;
 	public static final short PLAYER_BIT = 16;
 	public static final short NAIL_BIT =32;
+	public static final short STEP_BIT = 64;
 
 
 
@@ -43,8 +45,9 @@ public class ColorMyWorldGame extends Game{
 		bgm.play();
 
 		//set screen
-		setScreen(new bridgeScreen(this));
+//		setScreen(new bridgeScreen(this));
 
+		setScreen(new camTest(this));
 
 	}
 
