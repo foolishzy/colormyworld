@@ -118,4 +118,7 @@ public abstract class MyScreen implements com.badlogic.gdx.Screen{
     public void over(){
 
     }
+    public FitViewport getGamePort(){
+        return gamePort;
+    }
 }

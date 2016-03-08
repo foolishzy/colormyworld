@@ -12,8 +12,10 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.foolishzy.colormyworld.ColorMyWorldGame;
 import com.foolishzy.colormyworld.playScreen.Player;
+import com.foolishzy.colormyworld.playScreen2.playScreen2;
 import com.foolishzy.colormyworld.preScreen.item.staticItem;
 import com.foolishzy.colormyworld.spark.MyScreen;
 import com.foolishzy.colormyworld.spark.Signal.Signal;
@@ -32,12 +34,14 @@ public class playScreen1 extends MyScreen {
     private Signal signal;
     private TextureRegion hintRegion, boradRegion;
     private Player player;
+    private Array<step> steps;
     public playScreen1(ColorMyWorldGame game) {
         super(game);
         background = new Texture("playScreen1/background1.png");
         //hintRegion needs to be replaced
         hintRegion = new TextureRegion(new Texture("bridgeScreen/signal1.png"));
         boradRegion = new TextureRegion(new Texture("bridgeScreen/signal.png"));
+        steps = new Array<step>(3);
         //init
         define();
 
@@ -59,6 +63,10 @@ public class playScreen1 extends MyScreen {
         batch.begin();
         //background
         batch.draw(background, 0, 0, gamePort.getWorldWidth(), gamePort.getWorldHeight());
+        //steps
+        for (step step : steps) {
+            step.draw(batch);
+        }
         batch.end();
         //signal
         signal.draw(delta, batch, 1f);
@@ -76,11 +84,28 @@ public class playScreen1 extends MyScreen {
         //player update
         player.update(delta);
 
+        //step rise up
+        if (switchOfStep.isSwitched()) {
+            for (step step : steps) {
+                step.riseUp();
+            }
+        }
+        //steps update
+        for (step step : steps) {
+            step.update(delta);
+        }
+        //set next screen
+        if (player.catchRight())
+            over();
+
     }
 
     private void define(){
         map = new TmxMapLoader().load("playScreen1/playScreen1.tmx");
-
+        //steps
+        for (MapObject object : map.getLayers().get("step").getObjects()) {
+            steps.add( new step(this, ((RectangleMapObject) object)));
+        }
         //player
         player = new Player(
                 this,
@@ -93,8 +118,12 @@ public class playScreen1 extends MyScreen {
             new staticItem(world, object, false);
         }
 
+        //signal
+        for (MapObject object : map.getLayers().get(2).getObjects()) {
+            signal = new Signal(this, object, boradRegion, hintRegion);
+        }
         //spark
-        for (MapObject object : map.getLayers().get(3).getObjects()) {
+        for (MapObject object : map.getLayers().get("sparks").getObjects()) {
             //object must be rectangleMapObject
             if (!RectangleMapObject.class.isAssignableFrom(object.getClass())) {
                 Gdx.app.log("init spark mistake " ," must be rectangleMapObject");
@@ -103,21 +132,15 @@ public class playScreen1 extends MyScreen {
 
             if (object.getProperties().containsKey("switch")) {
                 switchOfStep = new Spark(
-                        rect.getX() / this.getPPM(),
-                        rect.getY() / this.getPPM(),
-                        rect.getWidth() / this.getPPM(),
-                        rect.getHeight() / this.getPPM(),
+                        rect.getX(),
+                        rect.getY(),
+                        rect.getWidth(),
+                        rect.getHeight(),
                         this
                 );
             }
         }
 
-        //signal
-        for (MapObject object : map.getLayers().get(2).getObjects()) {
-            signal = new Signal(this, object, boradRegion, hintRegion);
-        }
-
-        //step
 
     }
 
@@ -143,7 +166,13 @@ public class playScreen1 extends MyScreen {
 
     @Override
     public void dispose() {
-        super.dispose();
+        switchOfStep.dispose();
+        background.dispose();
+        signal.dispose();
+        for (step step : steps) {
+            step.dispose();
+        }
+        steps.clear();
     }
 
     @Override
@@ -173,6 +202,8 @@ public class playScreen1 extends MyScreen {
 
     @Override
     public void over() {
-        super.over();
+        Gdx.app.log("playScreen1 is over,","loading next screen...");
+        dispose();
+        game.setScreen(new playScreen2(((ColorMyWorldGame) game)));
     }
 }

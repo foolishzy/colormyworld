@@ -56,7 +56,8 @@ public class staticItem implements MediaDisposer.Disposable{
             fixdf.shape = shape;
             //filter
             fixdf.filter.categoryBits = ColorMyWorldGame.GROUND_BIT;
-            fixdf.filter.maskBits = ColorMyWorldGame.PLAYER_BIT;
+            fixdf.filter.maskBits = ColorMyWorldGame.PLAYER_BIT |
+                    ColorMyWorldGame.STEP_BIT;
 //            create
             body = world.createBody(bdf);
             body.createFixture(fixdf).setUserData(this);
@@ -78,7 +79,8 @@ public class staticItem implements MediaDisposer.Disposable{
             fixdef.isSensor = isSensor;
             //filter
             fixdef.filter.categoryBits = ColorMyWorldGame.GROUND_BIT;
-            fixdef.filter.maskBits = ColorMyWorldGame.PLAYER_BIT;
+            fixdef.filter.maskBits = ColorMyWorldGame.PLAYER_BIT |
+                    ColorMyWorldGame.STEP_BIT;
             //create
             body = world.createBody(bdf);
             body.createFixture(fixdef).setUserData(this);
@@ -106,7 +108,8 @@ public class staticItem implements MediaDisposer.Disposable{
             fixdef.isSensor = isSensor;
             //filter
             fixdef.filter.categoryBits = ColorMyWorldGame.GROUND_BIT;
-            fixdef.filter.maskBits = ColorMyWorldGame.PLAYER_BIT;
+            fixdef.filter.maskBits = ColorMyWorldGame.PLAYER_BIT |
+                    ColorMyWorldGame.STEP_BIT;
             //create
             body = world.createBody(bdf);
             body.createFixture(fixdef).setUserData(this);

@@ -25,12 +25,14 @@ public class Player extends Sprite {
     public Body body;
     private World world;
     private float PPM;
+    private MyScreen screen;
     private Vector2 jumpImpluse = new Vector2(0, 0.3f);
     private Vector2 runImpluse = new Vector2(0.3f, 0);
 
 
 
     public Player(MyScreen screen, World world, RectangleMapObject born){
+        this.screen = screen;
         this.world = world;
         this.PPM = screen.getPPM();
         definePlayer(born);
@@ -46,7 +48,8 @@ public class Player extends Sprite {
         //fixtureDef
         FixtureDef fixdef = new FixtureDef();
         fixdef.filter.categoryBits = ColorMyWorldGame.PLAYER_BIT;
-        fixdef.filter.maskBits = ColorMyWorldGame.GROUND_BIT ;
+        fixdef.filter.maskBits = ColorMyWorldGame.GROUND_BIT |
+                ColorMyWorldGame.STEP_BIT;
         //shape
         CircleShape shape = new CircleShape();
         shape.setRadius(6f / PPM);
@@ -69,6 +72,10 @@ public class Player extends Sprite {
             body.applyLinearImpulse(new Vector2( - runImpluse.x, runImpluse.y), body.getWorldCenter(), true);
         }
 
+    }
+
+    public boolean catchRight(){
+        return body.getWorldCenter().x > screen.getGamePort().getWorldWidth();
     }
 
 }

@@ -32,7 +32,7 @@ public class Signal extends Actor implements MediaDisposer.Disposable{
     private float HINT_TIME = 2.5f;
 
 
-    public Signal(MyScreen screen,MapObject positionObject,
+    public  Signal(MyScreen screen,MapObject positionObject,
                   TextureRegion boradRegion, TextureRegion hintRegion){
         /*
         * get position by positionObject

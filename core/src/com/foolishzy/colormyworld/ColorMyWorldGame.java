@@ -6,13 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.foolishzy.colormyworld.playScreen.bridgeScreen;
-import com.foolishzy.colormyworld.preScreen.preScreen;
-import com.foolishzy.colormyworld.testScreen.camTest;
-import com.foolishzy.colormyworld.testScreen.distanceJointTestScreen;
-import com.foolishzy.colormyworld.testScreen.polyLineTest;
-import com.foolishzy.colormyworld.testScreen.testScreen;
-
-import java.util.BitSet;
+import com.foolishzy.colormyworld.playScreen1.playScreen1;
 
 
 public class ColorMyWorldGame extends Game{
@@ -45,10 +39,7 @@ public class ColorMyWorldGame extends Game{
 		bgm.play();
 
 		//set screen
-//		setScreen(new bridgeScreen(this));
-
-		setScreen(new camTest(this));
-
+		setScreen(new playScreen1(this));
 	}
 
 
